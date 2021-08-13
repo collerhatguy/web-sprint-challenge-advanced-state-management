@@ -22,6 +22,7 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById("root")
 );
+// some stuff
 
 //Task List:
 //1. Add in all necessary components and libary methods.
