@@ -1,8 +1,48 @@
+import { FETCH_SMURFS, GOT_SMURFS, NO_SMURFS, ADD_SMURF, SET_ERROR } from "../actions";
+import { v4 as uuid } from "uuid"
 
 export const initialState = {
+    smurfs: [],
+    loading: false,
+    error: "" 
 }
 
-const reducer = ()=>{
+const reducer = (state = initialState, action) => {
+    console.log("state:", state)
+    switch(action.type) {
+        case FETCH_SMURFS:
+            console.log("smurf fishing")
+            return {
+                ...state,
+                loading: true
+            }
+        case GOT_SMURFS:
+            console.log("smurf fished")
+            return {
+                ...state,
+                loading: false,
+                smurfs: action.payload,
+                error: ""
+            }
+        case NO_SMURFS:
+            console.log(action.payload)
+            return {
+                ...state,
+                loading: false
+            }
+        case SET_ERROR:
+            return {
+                ...state,
+                error: action.payload
+            }
+        case ADD_SMURF:
+            return {
+                ...state,
+                smurfs: [...state.smurfs, { ...action.payload, id: uuid() }]
+            }
+        default:
+            return state;
+    }
 }
 
 //**************DO NOT EDIT ANY CODE BEYOND THIS POINT**************//
